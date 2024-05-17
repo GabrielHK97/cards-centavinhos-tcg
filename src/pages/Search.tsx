@@ -104,10 +104,18 @@ function Search() {
 
   return (
     <div className="flex flex-col justify-center items-center w-scren h-screen font-bold">
-      <div className="bg-primary w-full flex flex-row p-2 justify-center items-center">
-        <div className="w-full max-w-lg flex flex-row justify-center items-center gap-2">
+      <div className="h-12 bg-primary w-full flex flex-row p-2 justify-center items-center shadow">
+        <div
+          className="absolute left-0 p-2"
+          onClick={() => {
+            window.location.href = `/`;
+          }}
+        >
+          CentavinhosTCG
+        </div>
+        <div className="w-full max-w-lg flex flex-row justify-center items-center rounded-lg shadow">
           <input
-            className="input text-neutral w-full h-8"
+            className="input focus:outline-none text-base-100 bg-neutral w-full h-8 rounded-none rounded-l-lg"
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -118,7 +126,7 @@ function Search() {
             }}
           />
           <button
-            className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
+            className="btn btn-sm btn-base-100 text-neutral h-8 w-8 p-0 rounded-none rounded-r-lg"
             onClick={() => (window.location.href = `/search?q=${search}`)}
           >
             <SearchIcon className="w-4 h-4" />
@@ -160,7 +168,7 @@ function Search() {
       </div>
 
       <div className="bg-primary w-full text-base-100 p-2 flex flex-row gap-2 justify-center items-center">
-        <div className="hidden sm:hidden md:flex lg:flex xl:flex flex-row justify-center items-center">
+        <div className="hidden sm:hidden md:flex lg:flex xl:flex flex-row justify-center items-center text-neutral">
           {data.total_cards
             ? `${175 * (effectivePage - 1) + 1} - ${
                 data.total_cards < 175
@@ -168,26 +176,26 @@ function Search() {
                   : 175 * (effectivePage - 1) + 1 + 175 > data.total_cards
                   ? data.total_cards
                   : 175 * (effectivePage - 1) + 1 + 175
-              } of ${data.total_cards}`
-            : "0 - 0 of 0"}
+              } de ${data.total_cards}`
+            : "0 - 0 de 0"}
         </div>
         <div className="hidden sm:hidden md:flex lg:flex xl:flex flex-1"></div>
         <div className="flex flex-row justify-center items-center gap-2">
           <button
-            className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
+            className="btn btn-sm btn-base-100 text-neutral h-8 w-8 p-0"
             onClick={backwardFast}
           >
             <BackwardFastIcon className="w-4 h-4" />
           </button>
           <button
-            className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
+            className="btn btn-sm btn-base-100 text-neutral h-8 w-8 p-0"
             onClick={backwardStep}
           >
             <BackwardStepIcon className="w-4 h-4" />
           </button>
-          <div>
+          <div className="text-neutral">
             <input
-              className="input h-8 w-16 text-neutral"
+              className="input focus:outline-none h-8 w-16 text-base-100 bg-neutral"
               type="number"
               min={1}
               step="1"
@@ -208,16 +216,16 @@ function Search() {
                 }
               }}
             />
-            {` of ${pages}`}
+            {` de ${pages}`}
           </div>
           <button
-            className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
+            className="btn btn-sm btn-base-100 text-neutral h-8 w-8 p-0"
             onClick={fowardStep}
           >
             <FowardStepIcon className="w-4 h-4" />
           </button>
           <button
-            className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
+            className="btn btn-sm btn-base-100 text-neutral h-8 w-8 p-0"
             onClick={fowardFast}
           >
             <FowardFastIcon className="w-4 h-4" />

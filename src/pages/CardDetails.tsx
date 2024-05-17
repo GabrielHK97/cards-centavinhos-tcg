@@ -32,10 +32,18 @@ function CardDetails() {
 
   return (
     <div className="flex flex-col justify-center items-center w-scren h-screen font-bold">
-      <div className="bg-primary w-full flex flex-row p-2 justify-center items-center">
-        <div className="w-full max-w-lg flex flex-row justify-center items-center gap-2">
+      <div className="h-12 bg-primary w-full flex flex-row p-2 justify-center items-center shadow">
+        <div
+          className="absolute left-0 p-2"
+          onClick={() => {
+            window.location.href = `/`;
+          }}
+        >
+          CentavinhosTCG
+        </div>
+        <div className="w-full max-w-lg flex flex-row justify-center items-center rounded-lg shadow">
           <input
-            className="input text-neutral w-full h-8"
+            className="input focus:outline-none text-base-100 bg-neutral w-full h-8 rounded-none rounded-l-lg"
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -46,7 +54,7 @@ function CardDetails() {
             }}
           />
           <button
-            className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
+            className="btn btn-sm btn-base-100 text-neutral h-8 w-8 p-0 rounded-none rounded-r-lg"
             onClick={() => (window.location.href = `/search?q=${search}`)}
           >
             <SearchIcon className="w-4 h-4" />
