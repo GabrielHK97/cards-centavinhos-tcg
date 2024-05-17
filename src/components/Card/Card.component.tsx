@@ -14,7 +14,9 @@ function Card({ item, id, onClick, flip }: IProps) {
   const [face, setFace] = useState<0 | 1>(0);
 
   useEffect(() => {
-    flip(face);
+    if (flip) {
+      flip(face);
+    }
   }, [face]);
 
   return (
