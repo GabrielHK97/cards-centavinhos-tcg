@@ -63,8 +63,8 @@ function CardInfo({ item, id }: IProps) {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-row justify-center items-center gap-2">
-      <div className="w-1/2 h-full">
+    <div className="w-full flex-1 min-h-0 md:flex lg:flex xl:flex sm:flex-col md:flex-row lg:flex-row lg:flex-row justify-center items-center gap-2 overflow-auto">
+      <div className="w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 md:h-full lg:h-full xl:h-full mb-2 sm:mb-2">
         {image ? (
           !loadingImage ? (
             <Card id={id} item={image} flip={flip} />
@@ -77,7 +77,7 @@ function CardInfo({ item, id }: IProps) {
           </div>
         )}
       </div>
-      <div className="w-1/2 h-full flex flex-col gap-2">
+      <div className="w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-full flex flex-col gap-2">
         <div className="w-full h-1/2 flex flex-col gap-2 bg-accent text-base-100 text-bold p-2 rounded-lg justify-start items-center">
           {item.card_faces ? (
             item.layout === "split" ? (
