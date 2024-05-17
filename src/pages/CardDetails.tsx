@@ -31,7 +31,7 @@ function CardDetails() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center w-screen h-screen font-bold">
+    <div className="flex flex-col justify-center items-center w-dvw h-dvh font-bold">
       <div className="h-12 bg-primary w-full flex flex-row p-2 justify-center items-center shadow">
         <div
           className="flex sm:flex md:absolute lg:absolute xl:absolute left-0 sm:left-0 p-2"
