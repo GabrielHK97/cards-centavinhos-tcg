@@ -31,10 +31,10 @@ function CardDetails() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center w-scren h-screen font-bold">
+    <div className="flex flex-col justify-center items-center w-svw h-svw font-bold">
       <div className="h-12 bg-primary w-full flex flex-row p-2 justify-center items-center shadow">
         <div
-          className="absolute left-0 p-2"
+          className="flex sm:flex md:absolute lg:absolute xl:absolute left-0 sm:left-0 p-2"
           onClick={() => {
             window.location.href = `/`;
           }}
