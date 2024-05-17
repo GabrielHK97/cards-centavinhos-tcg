@@ -2,7 +2,7 @@ interface IProps {
   className: string;
 }
 
-function BackwardStep({ className }: IProps) {
+function BackwardStepIcon({ className }: IProps) {
   return (
     <svg
       className={className}
@@ -17,4 +17,4 @@ function BackwardStep({ className }: IProps) {
   );
 }
 
-export default BackwardStep;
+export default BackwardStepIcon;

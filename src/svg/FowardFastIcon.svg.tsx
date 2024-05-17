@@ -2,7 +2,7 @@ interface IProps {
   className: string;
 }
 
-function FowardFast({ className }: IProps) {
+function FowardFastIcon({ className }: IProps) {
   return (
     <svg
       className={className}
@@ -17,4 +17,4 @@ function FowardFast({ className }: IProps) {
   );
 }
 
-export default FowardFast;
+export default FowardFastIcon;

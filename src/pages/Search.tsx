@@ -4,10 +4,10 @@ import { scryfallAPI } from "../api/scryfall.api";
 import Card from "../components/Card/Card.component";
 import SpinnerCard from "../components/SpinnerCard/SpinnerCard.component";
 import SearchIcon from "../svg/SearchIcon.svg";
-import FowardStep from "../svg/FowardStep.svg";
-import FowardFast from "../svg/FowardFast.svg";
-import BackwardStep from "../svg/BackwardStep.svg";
-import BackwardFast from "../svg/BackwardFast.svg";
+import FowardStepIcon from "../svg/FowardStepIcon.svg";
+import FowardFastIcon from "../svg/FowardFastIcon.svg";
+import BackwardStepIcon from "../svg/BackwardStepIcon.svg";
+import BackwardFastIcon from "../svg/BackwardFastIcon.svg";
 
 interface Size {
   height: number;
@@ -30,9 +30,6 @@ function Search() {
   function getData() {
     setLoading(true);
     setSearch(searchParams.get("q") ?? "");
-    setPage(Number.parseInt(searchParams.get("page") ?? "1"));
-    setEffectivePage(Number.parseInt(searchParams.get("page") ?? "1"));
-    console.log(searchParams.get("q"));
     scryfallAPI
       .get(`/cards/search?page=${page}&q=f%3Apenny+${search}`)
       .then((res) => {
@@ -93,13 +90,8 @@ function Search() {
     resizeGrid();
   });
 
-  window.addEventListener("keydown", (e: any) => {
-    if (e.key === "Enter") {
-      window.location.href = `/search?page=${page}&q=${search}`;
-    }
-  });
-
   useEffect(() => {
+    console.log("initial");
     getData();
   }, []);
 
@@ -120,6 +112,11 @@ function Search() {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                window.location.href = `/search?q=${search}`;
+              }
+            }}
           />
           <button
             className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
@@ -172,13 +169,13 @@ function Search() {
             className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
             onClick={backwardFast}
           >
-            <BackwardFast className="w-4 h-4" />
+            <BackwardFastIcon className="w-4 h-4" />
           </button>
           <button
             className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
             onClick={backwardStep}
           >
-            <BackwardStep className="w-4 h-4" />
+            <BackwardStepIcon className="w-4 h-4" />
           </button>
           <div>
             <input
@@ -197,6 +194,11 @@ function Search() {
               onBlur={() => {
                 setEffectivePage(page);
               }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setEffectivePage(page);
+                }
+              }}
             />
             {` of ${pages}`}
           </div>
@@ -204,13 +206,13 @@ function Search() {
             className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
             onClick={fowardStep}
           >
-            <FowardStep className="w-4 h-4" />
+            <FowardStepIcon className="w-4 h-4" />
           </button>
           <button
             className="btn btn-sm btn-accent text-base-100 h-8 w-8 p-0"
             onClick={fowardFast}
           >
-            <FowardFast className="w-4 h-4" />
+            <FowardFastIcon className="w-4 h-4" />
           </button>
         </div>
       </div>

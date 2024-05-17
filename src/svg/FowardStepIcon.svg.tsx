@@ -1,7 +1,7 @@
 interface IProps {
   className: string;
 }
-function FowardStep({ className }: IProps) {
+function FowardStepIcon({ className }: IProps) {
   return (
     <svg
       className={className}
@@ -16,4 +16,4 @@ function FowardStep({ className }: IProps) {
   );
 }
 
-export default FowardStep;
+export default FowardStepIcon;
