@@ -1,0 +1,11 @@
+.cardInfo {
+    button:nth-child(even) {
+        background-color: #e5e7eb;
+        color: #1e2b30;
+    }
+
+    button:nth-child(odd) {
+        background-color: #1e2b30;
+        color: #e5e7eb;
+    }
+}

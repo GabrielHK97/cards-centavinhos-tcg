@@ -1,18 +1,19 @@
 import { useState } from "react";
-import Spinner from "../Spinner/Spinner.component";
 import SpinnerCard from "../SpinnerCard/SpinnerCard.component";
 
 interface IProps {
   src: string;
   id: number;
+  className: string;
 }
 
-function CardImage({ src, id }: IProps) {
+function CardImage({ src, id, className }: IProps) {
   const [loaded, setLoaded] = useState<boolean>(false);
   return (
     <>
       <img
-        style={{ display: loaded ? "block" : "none" }}
+        className={className}
+        style={{ display: loaded ? "block" : "none", objectFit: "contain"}}
         src={src}
         onLoad={() => {
           setLoaded(true);

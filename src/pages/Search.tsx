@@ -91,7 +91,6 @@ function Search() {
   });
 
   useEffect(() => {
-    console.log("initial");
     getData();
   }, []);
 
@@ -138,7 +137,16 @@ function Search() {
               }}
             >
               {data.data.map((item: any, index: number) => {
-                return <Card item={item} id={index + 1} />;
+                return (
+                  <Card
+                    item={item}
+                    id={index + 1}
+                    key={item.id}
+                    onClick={() =>
+                      (window.location.href = `/card?id=${item.id}`)
+                    }
+                  />
+                );
               })}
             </div>
           ) : (
@@ -154,14 +162,14 @@ function Search() {
       <div className="bg-primary w-full text-base-100 p-2 flex flex-row gap-2 justify-center items-center">
         <div className="hidden sm:hidden md:flex lg:flex xl:flex flex-row justify-center items-center">
           {data
-            ? `${175 * (effectivePage - 1) + 1} to ${
+            ? `${175 * (effectivePage - 1) + 1} - ${
                 data.total_cards < 175
                   ? data.total_cards
                   : 175 * (effectivePage - 1) + 1 + 175 > data.total_cards
                   ? data.total_cards
                   : 175 * (effectivePage - 1) + 1 + 175
               } of ${data.total_cards}`
-            : "0 to 0 of 0"}
+            : "0 - 0 of 0"}
         </div>
         <div className="hidden sm:hidden md:flex lg:flex xl:flex flex-1"></div>
         <div className="flex flex-row justify-center items-center gap-2">
