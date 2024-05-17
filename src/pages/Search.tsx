@@ -30,6 +30,8 @@ function Search() {
   function getData() {
     setLoading(true);
     setSearch(searchParams.get("q") ?? "");
+    setPage(Number.parseInt(searchParams.get("page") ?? "1"));
+    setEffectivePage(Number.parseInt(searchParams.get("page") ?? "1"));
     console.log(searchParams.get("q"));
     scryfallAPI
       .get(`/cards/search?page=${page}&q=f%3Apenny+${search}`)
@@ -69,14 +71,14 @@ function Search() {
   }
 
   function backwardStep() {
-    if (effectivePage - 1 > 0) {
+    if (effectivePage > 1) {
       setPage(effectivePage - 1);
       setEffectivePage(effectivePage - 1);
     }
   }
 
   function fowardStep() {
-    if (effectivePage + 1 < pages) {
+    if (effectivePage < pages) {
       setPage(effectivePage + 1);
       setEffectivePage(effectivePage + 1);
     }
@@ -93,7 +95,7 @@ function Search() {
 
   window.addEventListener("keydown", (e: any) => {
     if (e.key === "Enter") {
-      window.location.href = `/search?q=${search}`;
+      window.location.href = `/search?page=${page}&q=${search}`;
     }
   });
 
@@ -156,7 +158,11 @@ function Search() {
         <div className="hidden sm:hidden md:flex lg:flex xl:flex flex-row justify-center items-center">
           {data
             ? `${175 * (effectivePage - 1) + 1} to ${
-                175 * (effectivePage - 1) + 1 + 175
+                data.total_cards < 175
+                  ? data.total_cards
+                  : 175 * (effectivePage - 1) + 1 + 175 > data.total_cards
+                  ? data.total_cards
+                  : 175 * (effectivePage - 1) + 1 + 175
               } of ${data.total_cards}`
             : "0 to 0 of 0"}
         </div>
