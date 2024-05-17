@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Spinner from "../Spinner/Spinner.component";
+import SpinnerCard from "../SpinnerCard/SpinnerCard.component";
 
 interface IProps {
   src: string;
+  id: number;
 }
 
-function CardImage({ src }: IProps) {
+function CardImage({ src, id }: IProps) {
   const [loaded, setLoaded] = useState<boolean>(false);
   return (
     <>
@@ -16,8 +18,11 @@ function CardImage({ src }: IProps) {
           setLoaded(true);
         }}
       ></img>
-      <div className="flex flex-col justify-center items-center w-full h-full" style={{ display: loaded ? "none" : "flex" }}>
-        <Spinner className="w-24 h-24" />
+      <div
+        className="flex flex-col justify-center items-center w-full h-full"
+        style={{ display: loaded ? "none" : "flex" }}
+      >
+        <SpinnerCard id={id} />
       </div>
     </>
   );

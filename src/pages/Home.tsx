@@ -1,14 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import SearchIcon from "../svg/SearchIcon.svg";
 
 function Home() {
   const [search, setSearch] = useState<string>("");
-  const navigate = useNavigate();
 
   window.addEventListener("keydown", (e: any) => {
     if (e.key === "Enter") {
-      navigate(`/search?q=${search}`);
+      window.location.href = `/search?q=${search}`;
     }
   });
 
@@ -27,7 +25,7 @@ function Home() {
             />
             <button
               className="btn btn-primary text-base-100 h-12 w-12 p-0"
-              onClick={() => navigate(`/search?q=${search}`)}
+              onClick={() => (window.location.href = `/search?q=${search}`)}
             >
               <SearchIcon className="w-6 h-6" />
             </button>
