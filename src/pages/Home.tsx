@@ -1,29 +1,40 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SearchIcon from "../svg/SearchIcon.svg";
 
 function Home() {
   const [search, setSearch] = useState<string>("");
   const navigate = useNavigate();
 
+  window.addEventListener("keydown", (e: any) => {
+    if (e.key === "Enter") {
+      navigate(`/search?q=${search}`);
+    }
+  });
+
   return (
-    <div className="flex flex-col justify-center items-center w-scren h-screen text-base-100 font-bold">
-      <div className="bg-primary w-full">teste</div>
-      <div className="flex-grow flex flex-col justify-center items-center">
-        <div className="flex flex-col justify-center items-center gap-2 bg-accent rounded-lg p-5">
-          <div className="flex flex-row gap-2">
+    <div className="flex flex-col justify-center items-center w-scren h-screen font-bold">
+      <div className="bg-primary w-full h-12  text-base-100">
+        CentavinhosTCG
+      </div>
+      <div className="flex-grow flex flex-col justify-center items-center p-2 w-full">
+        <div className="flex flex-col justify-center items-center gap-2 bg-accent rounded-lg p-5 w-full max-w-lg">
+          <div className="flex flex-row gap-2 w-full">
             <input
-              className="input w-96 text-neutral"
+              className="input text-neutral w-full h-12"
               type="text"
               onChange={(e) => setSearch(e.target.value)}
             />
             <button
-              className="btn btn-primary font-bold"
+              className="btn btn-primary text-base-100 h-12 w-12 p-0"
               onClick={() => navigate(`/search?q=${search}`)}
             >
-              Procurar
+              <SearchIcon className="w-6 h-6" />
             </button>
           </div>
-          <div>Dica: A sintaxe é a mesma do Scryfall</div>
+          <div className="text-base-100">
+            Dica: A sintaxe é a mesma do Scryfall
+          </div>
         </div>
       </div>
     </div>
