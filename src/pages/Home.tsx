@@ -15,6 +15,7 @@ function Home() {
             <input
               className="input text-neutral w-full h-12"
               type="text"
+              value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
