@@ -6,7 +6,7 @@ import SpinnerCard from "../components/SpinnerCard/SpinnerCard.component";
 import CardInfo from "../components/CardInfo/CardInfo.component";
 
 function CardDetails() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [search, setSearch] = useState<string>("");
   const [id, setId] = useState<string>(searchParams.get("id") ?? "");
   const [data, setData] = useState<any>({});

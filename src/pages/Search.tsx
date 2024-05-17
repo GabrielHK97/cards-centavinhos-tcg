@@ -19,7 +19,7 @@ function getWindowSize(): Size {
 }
 
 function Search() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [search, setSearch] = useState<string>(searchParams.get("q") ?? "");
   const [data, setData] = useState<any>({});
   const [loading, setLoading] = useState<boolean>(true);
@@ -51,7 +51,7 @@ function Search() {
 
   function resizeGrid() {
     const grid = document.getElementById("grid");
-    const { height, width } = getWindowSize();
+    const { width } = getWindowSize();
     const columns = Math.ceil(width / 280) > 5 ? 5 : Math.ceil(width / 280);
     const rows = data
       ? Math.ceil((data.total_cards < 175 ? data.total_cards : 175) / columns)
