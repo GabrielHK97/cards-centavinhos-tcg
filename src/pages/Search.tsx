@@ -31,7 +31,7 @@ function Search() {
     setLoading(true);
     setSearch(searchParams.get("q") ?? "");
     scryfallAPI
-      .get(`/cards/search?page=${page}&q=f%3Apenny+${search}`)
+      .get(`/cards/search?page=${page}&q=${search}`)
       .then((res) => {
         setData(res.data);
         setPages(
