@@ -169,7 +169,7 @@ function Search() {
 
       <div className="bg-primary w-full text-base-100 p-2 flex flex-row gap-2 justify-center items-center">
         <div className="hidden sm:hidden md:flex lg:flex xl:flex flex-row justify-center items-center text-neutral">
-          {data.total_cards
+          {data && data.total_cards
             ? `${175 * (effectivePage - 1) + 1} - ${
                 data.total_cards < 175
                   ? data.total_cards
