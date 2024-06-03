@@ -5,7 +5,7 @@ interface IProps {
 }
 
 function Spinner(props: IProps) {
-    return <div className={`loader ${props.className}`}></div>;
+    return <div className={`spinner ${props.className}`}></div>;
 }
 
 export default Spinner;

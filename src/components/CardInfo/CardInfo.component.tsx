@@ -10,14 +10,16 @@ interface IProps {
 }
 
 function CardInfo({ item, id }: IProps) {
-  const [data, setData] = useState<any>({ data: [] });
+  const [printings, setPrintings] = useState<any>({ data: [] });
   const [face, setFace] = useState<0 | 1>(0);
-  const [image, setImage] = useState<any>(item);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [data, setData] = useState<any>(item);
   const [loadingImage, setLoadingImage] = useState<boolean>(false);
+  const [loadingData, setLoadingData] = useState<boolean>(false);
+  const [loadingPrintings, setLoadingPrintings] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  async function getData() {
-    setLoading(true);
+  async function getPrintings() {
+    setLoadingPrintings(true);
     let more = true;
     let page = 1;
     while (more) {
@@ -26,30 +28,30 @@ function CardInfo({ item, id }: IProps) {
           `/cards/search?order=released&unique=prints&page=${page}&q=!"${item.name}"+game%3Apaper`
         )
         .then((res) => {
-          setData((previous: any) => {
+          setPrintings((previous: any) => {
             return { ...res.data, data: [...previous.data, ...res.data.data] };
           });
           more = res.data.has_more;
           page++;
-          setLoading(false);
         })
         .catch(() => {
           more = false;
-          setData(null);
+          setPrintings(null);
         });
     }
+    if (!more) setLoadingPrintings(false);
   }
 
   function getItem(id: string) {
-    setLoadingImage(true);
+    setLoadingData(true);
     scryfallAPI
       .get(`/cards/${id}`)
       .then((res) => {
-        setImage(res.data);
-        setLoadingImage(false);
+        setData(res.data);
+        setLoadingData(false);
       })
       .catch(() => {
-        setImage(null);
+        setData(null);
       });
   }
 
@@ -57,17 +59,29 @@ function CardInfo({ item, id }: IProps) {
     setFace(face);
   }
 
+  function isImageLoaded(loaded: boolean) {
+    setLoadingImage(false);
+  }
+
   useEffect(() => {
-    console.log(item);
-    getData();
+    getPrintings();
   }, []);
 
-  return (
+  useEffect(() => {
+    if (loadingData && loadingImage && loadingPrintings) setLoading(true);
+  }, [loadingData, loadingImage, loadingPrintings]);
+
+  return !loading ? (
     <div className="w-full flex-1 min-h-0 md:flex lg:flex xl:flex sm:flex-col md:flex-row lg:flex-row lg:flex-row justify-center items-center gap-2 overflow-auto">
       <div className="w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 md:h-full lg:h-full xl:h-full mb-2 sm:mb-2 md:mb-0 lg:mb-0 xl:mb-0">
-        {image ? (
-          !loadingImage ? (
-            <Card id={id} item={image} flip={flip} />
+        {data ? (
+          !loadingData ? (
+            <Card
+              id={id}
+              item={data}
+              flip={flip}
+              isImageLoaded={isImageLoaded}
+            />
           ) : (
             <SpinnerCard id={0} />
           )
@@ -190,12 +204,12 @@ function CardInfo({ item, id }: IProps) {
             </>
           )}
         </div>
-        {data ? (
-          !loading && (
+        {printings ? (
+          !loadingPrintings ? (
             <div className="w-full h-1/2 border-2 border-primary rounded-lg text-bold p-2 flex flex-col gap-2 shadow">
-              {`Printings: (${data.total_cards})`}
+              {`Printings: (${printings.total_cards})`}
               <div className="cardInfo flex-1 min-h-0 overflow-auto flex flex-col gap-2">
-                {data.data.map((i: any) => {
+                {printings.data.map((i: any) => {
                   return (
                     <button
                       className="p-1 flex flex-row justify-start items-center rounded-lg relative"
@@ -208,6 +222,8 @@ function CardInfo({ item, id }: IProps) {
                 })}
               </div>
             </div>
+          ) : (
+            <SpinnerCard id={1} />
           )
         ) : (
           <div className="flex-1 text-neutral flex flex-col justify-center items-center">
@@ -216,6 +232,8 @@ function CardInfo({ item, id }: IProps) {
         )}
       </div>
     </div>
+  ) : (
+    <SpinnerCard id={0} />
   );
 }
 
